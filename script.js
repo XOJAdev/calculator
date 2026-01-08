@@ -25,6 +25,8 @@ console.log(isAdoult)
 
 */
 
+/* v1-kalkulyator
+
 let result = document.getElementById("result");
 
 function addValue(value) {
@@ -38,3 +40,53 @@ function clearResult() {
 function calculate() {
     result.value = eval(result.value);
 }
+*/
+
+// v2-kalkulyator
+
+let result = document.getElementById("result");
+
+function addValue(value) {
+    let lastChar = result.value.slice(-1);
+
+    // Operatorlar
+    let operators = ["+", "-", "*", "/"];
+
+    // Ketma-ket operatorni bloklash
+    if (operators.includes(value) && operators.includes(lastChar)) {
+        return;
+    }
+
+    result.value += value;
+}
+
+function clearResult() {
+    result.value = "";
+}
+
+function calculate() {
+    try {
+        // 0 ga bo‘lishni tekshirish
+        if (result.value.includes("/0")) {
+            alert("0 ga bo‘lish mumkin emas!");
+            return;
+        }
+
+        // Hisoblash
+        let calcResult = eval(result.value);
+
+        // Natija noto‘g‘ri bo‘lsa
+        if (calcResult === Infinity || isNaN(calcResult)) {
+            alert("Xato hisoblash!");
+            return;
+        }
+
+        result.value = calcResult;
+    } catch (error) {
+        alert("Xato ifoda!");
+    }
+}
+function calculate() {
+    result.value = eval(result.value);
+}
+
